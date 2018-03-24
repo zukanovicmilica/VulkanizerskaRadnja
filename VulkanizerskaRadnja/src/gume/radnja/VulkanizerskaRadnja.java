@@ -2,6 +2,8 @@ package gume.radnja;
 
 import java.util.LinkedList;
 
+import javax.management.RuntimeErrorException;
+
 import gume.AutoGuma;
 
 /**
@@ -16,7 +18,7 @@ public class VulkanizerskaRadnja {
 	/**
 	 * Lista dostupnih guma u vulkanizerskoj radnji
 	 */
-	private LinkedList<AutoGuma> gume = new LinkedList<AutoGuma>();
+	public LinkedList<AutoGuma> gume = new LinkedList<AutoGuma>();
 
 	/**
 	 * Dodaje novu gumu u ponudu vulkanizerske radnje
@@ -41,14 +43,18 @@ public class VulkanizerskaRadnja {
 	 * 
 	 * @param markaModel
 	 *            marka i model auto gume
-	 * @return lista sa gumama koje odgovaraju upitu
+	 * @return null ako je unet upit null, u suprotnom novu listu sa postojecim
+	 *         gumama za upit
+	 * @throws java.lang.RuntimeException
+	 *             ako je uneti parametar markaModel null
 	 */
+
 	public LinkedList<AutoGuma> pronadjiGumu(String markaModel) {
 		if (markaModel == null)
-			return null;
+			throw new RuntimeException("Marka i model ne smeju biti null.");
 		LinkedList<AutoGuma> novaLista = new LinkedList<AutoGuma>();
 		for (int i = 0; i < gume.size(); i++)
-			if (gume.get(i).equals(markaModel))
+			if (gume.get(i).getMarkaModel().equals(markaModel))
 				novaLista.add(gume.get(i));
 		return novaLista;
 	}
