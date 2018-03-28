@@ -2,7 +2,6 @@ package gume.radnja;
 
 import java.util.LinkedList;
 
-import javax.management.RuntimeErrorException;
 
 import gume.AutoGuma;
 
